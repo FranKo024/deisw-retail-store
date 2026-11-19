@@ -7,6 +7,7 @@ pipeline {
     environment {
         REGISTRY_USER = "u202311959"
         IMAGE_NAME    = "retail-store-u202311959"   // retail-store-<tu código>
+        SONAR_KEY     = "retail-store-U202311959"
         TAG           = "${env.BUILD_NUMBER}"
     }
     stages {
@@ -20,7 +21,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('MiSonarServer') {
                     withCredentials([string(credentialsId: 'sonarqube-token-id', variable: 'SONAR_TOKEN')]) {
-                        sh 'mvn -B clean verify sonar:sonar -Dsonar.projectKey=$IMAGE_NAME -Dsonar.login=$SONAR_TOKEN'
+                        sh 'mvn -B clean verify sonar:sonar -Dsonar.projectKey=$SONAR_KEY -Dsonar.login=$SONAR_TOKEN'
                     }
                 }
             }
