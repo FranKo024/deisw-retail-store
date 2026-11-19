@@ -19,7 +19,9 @@ pipeline {
         stage('3. SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('MiSonarServer') {
-                    sh "mvn -B clean verify sonar:sonar -Dsonar.projectKey=${IMAGE_NAME}"
+                    withCredentials([string(credentialsId: 'sonarqube-token-id', variable: 'SONAR_TOKEN')]) {
+                        sh 'mvn -B clean verify sonar:sonar -Dsonar.projectKey=$IMAGE_NAME -Dsonar.login=$SONAR_TOKEN'
+                    }
                 }
             }
         }
