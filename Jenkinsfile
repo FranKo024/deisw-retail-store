@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         REGISTRY_USER = "u202311959"
-        IMAGE_NAME    = "retail-store-U202311959"   // retail-store-<tu código>
+        IMAGE_NAME    = "retail-store-u202311959"   // retail-store-<tu código>
         TAG           = "${env.BUILD_NUMBER}"
     }
     stages {
